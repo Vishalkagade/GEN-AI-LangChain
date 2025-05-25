@@ -1,6 +1,7 @@
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 from typing import TypedDict, Annotated, Literal, Optional
+from pydantic import Field
 
 load_dotenv()
 
@@ -9,12 +10,12 @@ model = ChatOpenAI()
 class Review(TypedDict):
 
     summary : Annotated[str, "A brief summary of the Review"]
-    sentiment: Annotated[Literal["positive", "Negative"], "Return sentiment of the review either negative, positive or neutral"]
+    sentiment : Annotated[Literal["positive", "Negative"], "Return sentiment of the review either negative, positive or neutral"]
     pros : Annotated[Optional[list[str]], "Write the pros inside the list"]
     cons : Annotated[Optional[list[str]], "Write the cons inside the list, only when sepretely mentioned"]
     name : Annotated[str, "A name of person who wrote it"]
 
-structured_model = model.with_structured_output(Review,method='function_calling')
+structured_model = model.with_structured_output(Review, method = 'function_calling')
 
 result = structured_model.invoke("""I recently upgraded to the Samsung Galaxy S24 Ultra, and I must say, it’s an absolute powerhouse! The Snapdragon 8 Gen 3 processor makes everything lightning fast—whether I’m gaming, multitasking, or editing photos. The 5000mAh battery easily lasts a full day even with heavy use, and the 45W fast charging is a lifesaver.
 
