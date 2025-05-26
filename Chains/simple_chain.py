@@ -17,6 +17,8 @@ parser = StrOutputParser()
 
 chain = prompt | model | parser
 
-result = chain.invoke({"topic" : "Artificial Intelligience"})
+result = chain.invoke({"topic" : "Unity3D"})
 
 print(result)
+
+chain.get_graph().print_ascii()
