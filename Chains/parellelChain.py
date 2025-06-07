@@ -67,3 +67,5 @@ result = final_chain.invoke({
 })
 
 print(result)
+
+final_chain.get_graph().draw_ascii()
